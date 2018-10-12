@@ -133,7 +133,6 @@
             this.btBrowse.TabIndex = 8;
             this.btBrowse.Text = "...";
             this.btBrowse.UseVisualStyleBackColor = true;
-            this.btBrowse.Visible = false;
             this.btBrowse.Click += new System.EventHandler(this.btBrowse_Click);
             // 
             // openFileDialog1

@@ -115,7 +115,13 @@ namespace ImageConverter
 
         private void btBrowse_Click(object sender, EventArgs e)
         {
-            //openFileDialog1.
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Bitmap files|*.bmp";
+            openFileDialog1.Title = "Select a bitmap image file";
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                tbPath.Text = openFileDialog1.FileName;
+            }
         }
     }
 }

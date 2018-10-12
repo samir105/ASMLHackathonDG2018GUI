@@ -95,16 +95,7 @@ namespace ImageConverter
 
         private void btConvert_Click(object sender, EventArgs e)
         {
-            byte[,] origPixels = LoadBitmap(bitmap);
-            string txtPath = Path.ChangeExtension(path, "txt");
-            for (int barCount = 1; barCount <= 4; barCount++)
-            {
-                int newWidth = 8 * barCount;
-                int newHeight = 8 * 4;
-                byte[,] scaledPixels = ResizeImageCentered(origPixels, newWidth, newHeight);
-                string text = ConvertToText(scaledPixels);
-                File.WriteAllText(txtPath.Replace(".txt", "_BarCount" + barCount + ".txt"), text);
-            }
+            
         }
 
         private static string ConvertToText(byte[,] pixels)
@@ -139,6 +130,17 @@ namespace ImageConverter
             path = tbPath.Text.Trim();
             bitmap = new Bitmap(path);
             panel1.Invalidate();
+
+            byte[,] origPixels = LoadBitmap(bitmap);
+            string txtPath = Path.ChangeExtension(path, "txt");
+            for (int barCount = 1; barCount <= 4; barCount++)
+            {
+                int newWidth = 8 * barCount;
+                int newHeight = 8 * 4;
+                byte[,] scaledPixels = ResizeImageCentered(origPixels, newWidth, newHeight);
+                string text = ConvertToText(scaledPixels);
+                File.WriteAllText(txtPath.Replace(".txt", "_BarCount" + barCount + ".txt"), text);
+            }
         }
 
         private void btBrowse_Click(object sender, EventArgs e)

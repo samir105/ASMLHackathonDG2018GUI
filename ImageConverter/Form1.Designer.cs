@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btConvert = new System.Windows.Forms.Button();
             this.tbPath = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btLoad = new System.Windows.Forms.Button();
@@ -36,23 +35,13 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
-            // btConvert
-            // 
-            this.btConvert.Location = new System.Drawing.Point(12, 51);
-            this.btConvert.Name = "btConvert";
-            this.btConvert.Size = new System.Drawing.Size(106, 36);
-            this.btConvert.TabIndex = 0;
-            this.btConvert.Text = "Convert";
-            this.btConvert.UseVisualStyleBackColor = true;
-            this.btConvert.Click += new System.EventHandler(this.btConvert_Click);
-            // 
             // tbPath
             // 
             this.tbPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPath.Location = new System.Drawing.Point(12, 12);
             this.tbPath.Name = "tbPath";
-            this.tbPath.Size = new System.Drawing.Size(621, 26);
+            this.tbPath.Size = new System.Drawing.Size(702, 26);
             this.tbPath.TabIndex = 1;
             this.tbPath.Text = "C:\\Users\\Hackaton\\Desktop\\test.bmp";
             // 
@@ -69,8 +58,7 @@
             // 
             // btLoad
             // 
-            this.btLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btLoad.Location = new System.Drawing.Point(682, 12);
+            this.btLoad.Location = new System.Drawing.Point(12, 51);
             this.btLoad.Name = "btLoad";
             this.btLoad.Size = new System.Drawing.Size(75, 36);
             this.btLoad.TabIndex = 7;
@@ -81,7 +69,7 @@
             // btBrowse
             // 
             this.btBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBrowse.Location = new System.Drawing.Point(639, 12);
+            this.btBrowse.Location = new System.Drawing.Point(720, 12);
             this.btBrowse.Name = "btBrowse";
             this.btBrowse.Size = new System.Drawing.Size(37, 36);
             this.btBrowse.TabIndex = 8;
@@ -102,7 +90,6 @@
             this.Controls.Add(this.btLoad);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tbPath);
-            this.Controls.Add(this.btConvert);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Image Converter";
@@ -114,8 +101,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btConvert;
         private System.Windows.Forms.TextBox tbPath;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btLoad;

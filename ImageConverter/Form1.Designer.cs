@@ -34,11 +34,15 @@
             this.rbBarCount3 = new System.Windows.Forms.RadioButton();
             this.rbBarCount2 = new System.Windows.Forms.RadioButton();
             this.rbBarCount1 = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btLoad = new System.Windows.Forms.Button();
+            this.btBrowse = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // btConvert
             // 
-            this.btConvert.Location = new System.Drawing.Point(12, 104);
+            this.btConvert.Location = new System.Drawing.Point(12, 51);
             this.btConvert.Name = "btConvert";
             this.btConvert.Size = new System.Drawing.Size(106, 36);
             this.btConvert.TabIndex = 0;
@@ -52,7 +56,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPath.Location = new System.Drawing.Point(12, 12);
             this.tbPath.Name = "tbPath";
-            this.tbPath.Size = new System.Drawing.Size(786, 26);
+            this.tbPath.Size = new System.Drawing.Size(652, 26);
             this.tbPath.TabIndex = 1;
             this.tbPath.Text = "C:\\Users\\Hackaton\\Desktop\\test.bmp";
             // 
@@ -102,11 +106,48 @@
             this.rbBarCount1.UseVisualStyleBackColor = true;
             this.rbBarCount1.Visible = false;
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(12, 93);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(494, 489);
+            this.panel1.TabIndex = 6;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // btLoad
+            // 
+            this.btLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btLoad.Location = new System.Drawing.Point(713, 12);
+            this.btLoad.Name = "btLoad";
+            this.btLoad.Size = new System.Drawing.Size(75, 36);
+            this.btLoad.TabIndex = 7;
+            this.btLoad.Text = "Load";
+            this.btLoad.UseVisualStyleBackColor = true;
+            this.btLoad.Click += new System.EventHandler(this.btLoad_Click);
+            // 
+            // btBrowse
+            // 
+            this.btBrowse.Location = new System.Drawing.Point(670, 12);
+            this.btBrowse.Name = "btBrowse";
+            this.btBrowse.Size = new System.Drawing.Size(37, 36);
+            this.btBrowse.TabIndex = 8;
+            this.btBrowse.Text = "...";
+            this.btBrowse.UseVisualStyleBackColor = true;
+            this.btBrowse.Visible = false;
+            this.btBrowse.Click += new System.EventHandler(this.btBrowse_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 594);
+            this.Controls.Add(this.btBrowse);
+            this.Controls.Add(this.btLoad);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.rbBarCount1);
             this.Controls.Add(this.rbBarCount2);
             this.Controls.Add(this.rbBarCount3);
@@ -128,6 +169,10 @@
         private System.Windows.Forms.RadioButton rbBarCount3;
         private System.Windows.Forms.RadioButton rbBarCount2;
         private System.Windows.Forms.RadioButton rbBarCount1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btLoad;
+        private System.Windows.Forms.Button btBrowse;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

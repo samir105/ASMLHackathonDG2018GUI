@@ -13,15 +13,16 @@ namespace ImageConverter
 {
     public partial class Form1 : Form
     {
+        string path;
+        Bitmap bitmap;//=new Bitmap(320, 320);
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        public static byte[,] LoadBitmap(string path)
+        public static byte[,] LoadBitmap(Bitmap bitmap)
         {
-            Bitmap bitmap = new Bitmap(path);
-
             int width = bitmap.Width;
             int height = bitmap.Height;
 
@@ -64,8 +65,7 @@ namespace ImageConverter
 
         private void btConvert_Click(object sender, EventArgs e)
         {
-            string path = tbPath.Text.Trim();
-            byte[,] origPixels = LoadBitmap(path);
+            byte[,] origPixels = LoadBitmap(bitmap);
             /*if (rbBarCount1.Checked)
                 barCount = 1;
             else if (rbBarCount2.Checked)
@@ -97,6 +97,25 @@ namespace ImageConverter
             }
 
             return sb.ToString();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            if (bitmap!=null)
+            //e.Graphics.DrawImage(bitmap, new Point(0, 0));
+            e.Graphics.DrawImage(bitmap, new Rectangle(0, 0, panel1.Width, panel1.Height));
+        }
+
+        private void btLoad_Click(object sender, EventArgs e)
+        {
+            path = tbPath.Text.Trim();
+            bitmap = new Bitmap(path);
+            panel1.Invalidate();
+        }
+
+        private void btBrowse_Click(object sender, EventArgs e)
+        {
+            //openFileDialog1.
         }
     }
 }

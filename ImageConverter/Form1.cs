@@ -37,7 +37,7 @@ namespace ImageConverter
                 {
                     Color color = bitmap.GetPixel(j, i);
                     //bool isBlack = (color.R <255 || color.G <255 || color.B <255);
-                    bool isBlack = GetGrayScale(color.R, color.G, color.B)<127;
+                    bool isBlack = GetGrayScale(color.R, color.G, color.B) < 127;
                     pixels[i, j] = (isBlack ? (byte)1 : (byte)0);
                 }
             return pixels;
@@ -48,14 +48,14 @@ namespace ImageConverter
             byte[,] newPixels = new byte[newHeight, newWidth];
             int widthScale = origPixels.GetLength(1) / newWidth;
             int heightScale = origPixels.GetLength(0) / newHeight;
-            for(int i=0;i<newHeight;i++)
+            for (int i = 0; i < newHeight; i++)
             {
-                for(int j=0;j<newWidth;j++)
+                for (int j = 0; j < newWidth; j++)
                 {
                     int sum = 0;
-                    for(int ii=i*heightScale;ii<(i+1)*heightScale;ii++)
+                    for (int ii = i * heightScale; ii < (i + 1) * heightScale; ii++)
                     {
-                        for(int jj=j*widthScale;jj<(j+1)*widthScale;jj++)
+                        for (int jj = j * widthScale; jj < (j + 1) * widthScale; jj++)
                         {
                             sum += origPixels[ii, jj];
                         }
@@ -72,13 +72,6 @@ namespace ImageConverter
         private void btConvert_Click(object sender, EventArgs e)
         {
             byte[,] origPixels = LoadBitmap(bitmap);
-            /*if (rbBarCount1.Checked)
-                barCount = 1;
-            else if (rbBarCount2.Checked)
-                barCount = 2;
-            else if (rbBarCount3.Checked)
-                barCount = 3;
-            else barCount = 4;*/
             string txtPath = Path.ChangeExtension(path, "txt");
             for (int barCount = 1; barCount <= 4; barCount++)
             {
@@ -86,7 +79,7 @@ namespace ImageConverter
                 int newHeight = 8 * 4;
                 byte[,] scaledPixels = ResizeImage(origPixels, newWidth, newHeight);
                 string text = ConvertToText(scaledPixels);
-                File.WriteAllText(txtPath.Replace(".txt", "_BarCount"+barCount+".txt"), text);
+                File.WriteAllText(txtPath.Replace(".txt", "_BarCount" + barCount + ".txt"), text);
             }
         }
 
@@ -107,9 +100,14 @@ namespace ImageConverter
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            if (bitmap!=null)
-            //e.Graphics.DrawImage(bitmap, new Point(0, 0));
-            e.Graphics.DrawImage(bitmap, new Rectangle(0, 0, panel1.Width, panel1.Height));
+            if (bitmap == null) return;
+            int side = panel1.Width;
+            if (panel1.Height < side)
+                side = panel1.Height;
+            int left = (panel1.Width-side)/2;
+            int top = (panel1.Height-side)/2;
+            Rectangle rect = new Rectangle(left, top, side, side);
+            e.Graphics.DrawImage(bitmap, rect);
         }
 
         private void btLoad_Click(object sender, EventArgs e)
@@ -128,6 +126,16 @@ namespace ImageConverter
             {
                 tbPath.Text = openFileDialog1.FileName;
             }
+        }
+
+        private void Form1_ResizeEnd(object sender, EventArgs e)
+        {
+            panel1.Invalidate();
+        }
+
+        private void Form1_ResizeBegin(object sender, EventArgs e)
+        {
+            panel1.Invalidate();
         }
     }
 }

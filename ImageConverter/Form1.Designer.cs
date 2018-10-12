@@ -30,9 +30,10 @@
         {
             this.tbPath = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btLoad = new System.Windows.Forms.Button();
+            this.btLoadA = new System.Windows.Forms.Button();
             this.btBrowse = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.btLoadB = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbPath
@@ -56,15 +57,15 @@
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // btLoad
+            // btLoadA
             // 
-            this.btLoad.Location = new System.Drawing.Point(12, 51);
-            this.btLoad.Name = "btLoad";
-            this.btLoad.Size = new System.Drawing.Size(75, 36);
-            this.btLoad.TabIndex = 7;
-            this.btLoad.Text = "Load";
-            this.btLoad.UseVisualStyleBackColor = true;
-            this.btLoad.Click += new System.EventHandler(this.btLoad_Click);
+            this.btLoadA.Location = new System.Drawing.Point(12, 51);
+            this.btLoadA.Name = "btLoadA";
+            this.btLoadA.Size = new System.Drawing.Size(75, 36);
+            this.btLoadA.TabIndex = 7;
+            this.btLoadA.Text = "Load A";
+            this.btLoadA.UseVisualStyleBackColor = true;
+            this.btLoadA.Click += new System.EventHandler(this.btLoadA_Click);
             // 
             // btBrowse
             // 
@@ -81,13 +82,24 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // btLoadB
+            // 
+            this.btLoadB.Location = new System.Drawing.Point(111, 51);
+            this.btLoadB.Name = "btLoadB";
+            this.btLoadB.Size = new System.Drawing.Size(75, 36);
+            this.btLoadB.TabIndex = 9;
+            this.btLoadB.Text = "Load B";
+            this.btLoadB.UseVisualStyleBackColor = true;
+            this.btLoadB.Click += new System.EventHandler(this.btLoadB_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 484);
+            this.Controls.Add(this.btLoadB);
             this.Controls.Add(this.btBrowse);
-            this.Controls.Add(this.btLoad);
+            this.Controls.Add(this.btLoadA);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tbPath);
             this.Name = "Form1";
@@ -95,6 +107,7 @@
             this.Text = "Image Converter";
             this.ResizeBegin += new System.EventHandler(this.Form1_ResizeBegin);
             this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,9 +116,10 @@
         #endregion
         private System.Windows.Forms.TextBox tbPath;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btLoad;
+        private System.Windows.Forms.Button btLoadA;
         private System.Windows.Forms.Button btBrowse;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button btLoadB;
     }
 }
 

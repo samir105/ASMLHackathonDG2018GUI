@@ -14,103 +14,11 @@ namespace ImageConverter
     public partial class Form1 : Form
     {
         string path;
-        Bitmap bitmap;//=new Bitmap(320, 320);
+        Bitmap bitmap;
 
         public Form1()
         {
             InitializeComponent();
-        }
-
-        public static byte GetGrayScale(byte r, byte g, byte b)
-        {
-            return (byte)Math.Floor(0.21 * r + 0.72 * g + 0.07 * b);
-        }
-
-        public static byte[,] LoadBitmap(Bitmap bitmap)
-        {
-            int width = bitmap.Width;
-            int height = bitmap.Height;
-
-            byte[,] pixels = new byte[height, width];
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                {
-                    Color color = bitmap.GetPixel(j, i);
-                    //bool isBlack = (color.R <255 || color.G <255 || color.B <255);
-                    bool isBlack = GetGrayScale(color.R, color.G, color.B) < 127;
-                    pixels[i, j] = (isBlack ? (byte)1 : (byte)0);
-                }
-            return pixels;
-        }
-
-        public static byte[,] ResizeImage(byte[,] origPixels, int newWidth, int newHeight)
-        {
-            byte[,] newPixels = new byte[newHeight, newWidth];
-            int widthScale = origPixels.GetLength(1) / newWidth;
-            int heightScale = origPixels.GetLength(0) / newHeight;
-            for (int i = 0; i < newHeight; i++)
-            {
-                for (int j = 0; j < newWidth; j++)
-                {
-                    int sum = 0;
-                    for (int ii = i * heightScale; ii < (i + 1) * heightScale; ii++)
-                    {
-                        for (int jj = j * widthScale; jj < (j + 1) * widthScale; jj++)
-                        {
-                            sum += origPixels[ii, jj];
-                        }
-                    }
-                    if (sum >= widthScale * heightScale)
-                        newPixels[i, j] = 1;
-                    else
-                        newPixels[i, j] = 0;
-                }
-            }
-            return newPixels;
-        }
-
-        public static byte[,] ResizeImageCentered(byte[,] pixels, int newWidth, int newHeight)
-        {
-            byte[,] pixelsNew = new byte[newHeight, newWidth];
-            for (int i = 0; i < pixelsNew.GetLength(0); i++)
-                for (int j = 0; j < pixelsNew.GetLength(1); j++)
-                    pixelsNew[i, j] = 0;
-            int width = newWidth;
-            int height = newHeight;
-            bool needsCentering = false;
-            if (height > newWidth)
-            {
-                height = newWidth;
-                needsCentering = true;
-            }
-            byte[,] pixelsScaled = ResizeImage(pixels, width, height);
-            int heightShift = 0;
-            if (needsCentering)
-                heightShift = (newHeight - newWidth) / 2;
-            for (int i = 0; i < pixelsScaled.GetLength(0); i++)
-                for (int j = 0; j < pixelsScaled.GetLength(1); j++)
-                    pixelsNew[i+heightShift, j] = pixelsScaled[i,j];
-            return pixelsNew;
-        }
-
-        private void btConvert_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private static string ConvertToText(byte[,] pixels)
-        {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < pixels.GetLength(0); i++)
-            {
-                for (int j = 0; j < pixels.GetLength(1); j++)
-                {
-                    sb.Append(pixels[i, j].ToString());
-                }
-                sb.Append("\r\n");
-            }
-
-            return sb.ToString();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -131,14 +39,14 @@ namespace ImageConverter
             bitmap = new Bitmap(path);
             panel1.Invalidate();
 
-            byte[,] origPixels = LoadBitmap(bitmap);
+            byte[,] origPixels = ImageTools.LoadBitmap(bitmap);
             string txtPath = Path.ChangeExtension(path, "txt");
             for (int barCount = 1; barCount <= 4; barCount++)
             {
                 int newWidth = 8 * barCount;
                 int newHeight = 8 * 4;
-                byte[,] scaledPixels = ResizeImageCentered(origPixels, newWidth, newHeight);
-                string text = ConvertToText(scaledPixels);
+                byte[,] scaledPixels = ImageTools.ResizeImageCentered(origPixels, newWidth, newHeight);
+                string text = ImageTools.ConvertToText(scaledPixels);
                 File.WriteAllText(txtPath.Replace(".txt", "_BarCount" + barCount + ".txt"), text);
             }
         }

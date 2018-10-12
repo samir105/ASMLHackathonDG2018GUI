@@ -69,6 +69,30 @@ namespace ImageConverter
             return newPixels;
         }
 
+        public static byte[,] ResizeImageCentered(byte[,] pixels, int newWidth, int newHeight)
+        {
+            byte[,] pixelsNew = new byte[newHeight, newWidth];
+            for (int i = 0; i < pixelsNew.GetLength(0); i++)
+                for (int j = 0; j < pixelsNew.GetLength(1); j++)
+                    pixelsNew[i, j] = 0;
+            int width = newWidth;
+            int height = newHeight;
+            bool needsCentering = false;
+            if (height > newWidth)
+            {
+                height = newWidth;
+                needsCentering = true;
+            }
+            byte[,] pixelsScaled = ResizeImage(pixels, width, height);
+            int heightShift = 0;
+            if (needsCentering)
+                heightShift = (newHeight - newWidth) / 2;
+            for (int i = 0; i < pixelsScaled.GetLength(0); i++)
+                for (int j = 0; j < pixelsScaled.GetLength(1); j++)
+                    pixelsNew[i+heightShift, j] = pixelsScaled[i,j];
+            return pixelsNew;
+        }
+
         private void btConvert_Click(object sender, EventArgs e)
         {
             byte[,] origPixels = LoadBitmap(bitmap);
@@ -77,7 +101,7 @@ namespace ImageConverter
             {
                 int newWidth = 8 * barCount;
                 int newHeight = 8 * 4;
-                byte[,] scaledPixels = ResizeImage(origPixels, newWidth, newHeight);
+                byte[,] scaledPixels = ResizeImageCentered(origPixels, newWidth, newHeight);
                 string text = ConvertToText(scaledPixels);
                 File.WriteAllText(txtPath.Replace(".txt", "_BarCount" + barCount + ".txt"), text);
             }

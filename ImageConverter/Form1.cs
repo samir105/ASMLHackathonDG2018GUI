@@ -21,6 +21,11 @@ namespace ImageConverter
             InitializeComponent();
         }
 
+        public static byte GetGrayScale(byte r, byte g, byte b)
+        {
+            return (byte)Math.Floor(0.21 * r + 0.72 * g + 0.07 * b);
+        }
+
         public static byte[,] LoadBitmap(Bitmap bitmap)
         {
             int width = bitmap.Width;
@@ -31,8 +36,9 @@ namespace ImageConverter
                 for (int j = 0; j < width; j++)
                 {
                     Color color = bitmap.GetPixel(j, i);
-                    bool hasColor = (color.R <255 || color.G <255 || color.B <255);
-                    pixels[i, j] = (hasColor ? (byte)1 : (byte)0);
+                    //bool isBlack = (color.R <255 || color.G <255 || color.B <255);
+                    bool isBlack = GetGrayScale(color.R, color.G, color.B)<127;
+                    pixels[i, j] = (isBlack ? (byte)1 : (byte)0);
                 }
             return pixels;
         }

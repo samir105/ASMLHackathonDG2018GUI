@@ -154,6 +154,7 @@
             this.Controls.Add(this.tbPath);
             this.Controls.Add(this.btConvert);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Image Converter";
             this.ResumeLayout(false);
             this.PerformLayout();

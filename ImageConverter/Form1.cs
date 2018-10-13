@@ -135,12 +135,12 @@ namespace ImageConverter
             byte[,] scaledPixelsB4 = ImageTools.ResizeImageCentered(pixelsB, 8 * 4, 8 * 4);
             string textB4 = ImageTools.ConvertToText(scaledPixelsB1).Replace("\r\n", "");
 
-            string queryStr = String.Format(queryFormat, 
+            string queryStr = String.Format(queryFormat,
                 textA1, textA2, textA3, textA4,
                 textB1, textB2, textB3, textB4);
 
             using (HttpClient client = new HttpClient())
-            using (HttpResponseMessage response = await client.GetAsync(API_DOMAIN+queryStr))
+            using (HttpResponseMessage response = await client.GetAsync(API_DOMAIN + queryStr))
             using (HttpContent content = response.Content)
             {
                 string result = await content.ReadAsStringAsync();
@@ -154,6 +154,38 @@ namespace ImageConverter
                     MessageBox.Show("Error! Empty result");
                 }
             }
+        }
+
+        private async void timer1_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                string queryStr = "/ACTIVE_NODE_COUNT";
+
+                using (HttpClient client = new HttpClient())
+                using (HttpResponseMessage response = await client.GetAsync(API_DOMAIN + queryStr))
+                using (HttpContent content = response.Content)
+                {
+                    string result = await content.ReadAsStringAsync();
+
+                    if (result != null && result.Length >= 0)
+                    {
+                        laActiveNodeCount.Text = "Active node count: " + result;
+                    }
+                    else
+                    {
+                        //MessageBox.Show("Error! Empty result");
+                    }
+                }
+            }
+            catch (Exception exp)
+            {
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            timer1_Tick(sender, null);
         }
     }
 }

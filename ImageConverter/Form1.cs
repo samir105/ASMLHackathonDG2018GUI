@@ -14,7 +14,8 @@ namespace ImageConverter
 {
     public partial class Form1 : Form
     {
-        string API_DOMAIN = "http://10.14.0.205/";
+        string[] IPs;
+        string API_DOMAIN = "";
 
         string path;
         Bitmap bitmapA;
@@ -107,6 +108,8 @@ namespace ImageConverter
 
         private async void btSend_Click(object sender, EventArgs e)
         {
+            if (API_DOMAIN == "") return;
+
             string queryFormat = "SHAPES/?A1={0}&A2={1}&A3={2}&A4={3}&B1={4}&B2={5}&B3={6}&B4={7}";
             byte[,] pixelsA = ImageTools.LoadBitmap(bitmapA);
             byte[,] pixelsB = ImageTools.LoadBitmap(bitmapB);
@@ -158,19 +161,41 @@ namespace ImageConverter
 
         private async void timer1_Tick(object sender, EventArgs e)
         {
+            if (API_DOMAIN == "")
+            {
+                foreach (string IP in IPs)
+                {
+                    if (API_DOMAIN != "") break;
+                    string domain = "http://" + IP + "/";
+                    await GetNodeCount(domain);
+                }
+            }
+            else
+            {
+                await GetNodeCount(API_DOMAIN);
+            }
+        }
+
+        private async Task GetNodeCount(string domain)
+        {
             try
             {
                 string queryStr = "/ACTIVE_NODE_COUNT";
 
                 using (HttpClient client = new HttpClient())
-                using (HttpResponseMessage response = await client.GetAsync(API_DOMAIN + queryStr))
+                using (HttpResponseMessage response = await client.GetAsync(domain + queryStr))
                 using (HttpContent content = response.Content)
                 {
                     string result = await content.ReadAsStringAsync();
 
                     if (result != null && result.Length >= 0)
                     {
-                        laActiveNodeCount.Text = "Active node count: " + result;
+                        if (API_DOMAIN == "")
+                        {
+                            API_DOMAIN = domain;
+                            tbUrl.Text = domain;
+                            laActiveNodeCount.Text = "Active node count: " + result;
+                        }
                     }
                     else
                     {
@@ -185,6 +210,7 @@ namespace ImageConverter
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            IPs = tbUrl.Text.Trim().Split(';');
             timer1_Tick(sender, null);
         }
     }

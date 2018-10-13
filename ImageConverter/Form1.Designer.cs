@@ -40,6 +40,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.laActiveNodeCount = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbUrl = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +54,7 @@
             this.panel1.Location = new System.Drawing.Point(16, 150);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(891, 339);
+            this.panel1.Size = new System.Drawing.Size(983, 339);
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -69,7 +71,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(602, 121);
+            this.groupBox1.Size = new System.Drawing.Size(517, 121);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Set image";
@@ -77,10 +79,10 @@
             // btBrowse
             // 
             this.btBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBrowse.Location = new System.Drawing.Point(531, 28);
+            this.btBrowse.Location = new System.Drawing.Point(446, 30);
             this.btBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.btBrowse.Name = "btBrowse";
-            this.btBrowse.Size = new System.Drawing.Size(41, 36);
+            this.btBrowse.Size = new System.Drawing.Size(35, 33);
             this.btBrowse.TabIndex = 15;
             this.btBrowse.Text = "...";
             this.btBrowse.UseVisualStyleBackColor = true;
@@ -93,7 +95,7 @@
             this.tbPath.Location = new System.Drawing.Point(19, 31);
             this.tbPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbPath.Name = "tbPath";
-            this.tbPath.Size = new System.Drawing.Size(503, 30);
+            this.tbPath.Size = new System.Drawing.Size(418, 30);
             this.tbPath.TabIndex = 14;
             this.tbPath.Text = "C:\\Users\\Hackaton\\Desktop\\test.bmp";
             // 
@@ -133,12 +135,14 @@
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.tbUrl);
+            this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.laActiveNodeCount);
-            this.groupBox2.Location = new System.Drawing.Point(626, 13);
+            this.groupBox2.Location = new System.Drawing.Point(541, 13);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(280, 121);
+            this.groupBox2.Size = new System.Drawing.Size(457, 121);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Status";
@@ -152,17 +156,36 @@
             // laActiveNodeCount
             // 
             this.laActiveNodeCount.AutoSize = true;
-            this.laActiveNodeCount.Location = new System.Drawing.Point(18, 50);
+            this.laActiveNodeCount.Location = new System.Drawing.Point(18, 77);
             this.laActiveNodeCount.Name = "laActiveNodeCount";
             this.laActiveNodeCount.Size = new System.Drawing.Size(174, 25);
             this.laActiveNodeCount.TabIndex = 0;
             this.laActiveNodeCount.Text = "Active node count:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(36, 25);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "IP:";
+            // 
+            // tbUrl
+            // 
+            this.tbUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbUrl.Location = new System.Drawing.Point(81, 37);
+            this.tbUrl.Name = "tbUrl";
+            this.tbUrl.Size = new System.Drawing.Size(357, 30);
+            this.tbUrl.TabIndex = 2;
+            this.tbUrl.Text = "10.133.67.101;10.117.173.100;10.133.87.101;10.136.25.100";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(923, 504);
+            this.ClientSize = new System.Drawing.Size(1015, 504);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
@@ -195,6 +218,8 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Label laActiveNodeCount;
+        private System.Windows.Forms.TextBox tbUrl;
+        private System.Windows.Forms.Label label1;
     }
 }
 
